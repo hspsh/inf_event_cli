@@ -47,8 +47,8 @@ Providing that you have virtualenv activated
 - Must contain:
     - date
     - time
-    - name
-    - description
+    - name (**CAUTION** Be sure to wrap in quotes)
+    - description (**CAUTION** Be sure to wrap in quotes)
 - May contain:
     - comments / message from event creator
 
