@@ -1,12 +1,31 @@
 import meetup.api
 from datetime import datetime
+from config import target
 
-apiKey = '[insert api key here]'
-requiredData = {'group_urlname':'Meetup-API-Testing'}
+def _importAPIKey():
+    with open('config/apikey.txt', 'r') as file:
+        key = file.readline()
+        # trimms newline character
+        key = key[:-1]
+
+    return key
 
 
 def _initClient(apiKey):
     return meetup.api.Client(apiKey)
+
+
+def _initTargetData(client):
+    _data = {}
+
+    _data['group_urlname'] = target.URL_NAME
+
+    group_info = client.GetGroup(urlname=_data['group_urlname'])
+    _data['group_id'] = group_info.id
+
+    _data['venue_id'] = target.VENUE
+
+    return _data
 
 
 def convertTime(time):
@@ -19,10 +38,11 @@ def convertTime(time):
 
 
 def createEvent(eventData):
+    apiKey = _importAPIKey()
+    print(apiKey)
     client = _initClient(apiKey)
-    group_info = client.GetGroup(urlname=requiredData['group_urlname'])
-    requiredData['group_id'] = group_info.id
+    targetData = _initTargetData(client)
 
     eventData['time'] = convertTime(eventData['time'])
 
-    client.CreateEvent(** requiredData, **eventData, venue_id=25186630)
+    client.CreateEvent(** targetData, **eventData)
