@@ -5,32 +5,32 @@
 0. Clone this repo:
 
 ```bash
-$ git clone https://github.com/hs3city/inf_event_cli
+    git clone https://github.com/hs3city/inf_event_cli
 ```
 
 1. Enter folder:
 ```
-$ cd inf_event_cli
+    cd inf_event_cli
 ```
 
 2. Create virtualenv:
 ```
-$ virtualenv -p python3 env
+    virtualenv -p python3 env
 ```
 
 3. Activate virtualenv
 ```
-$ . env/bin/activate
+    . env/bin/activate
 ```
 
 4. Install requirements
 ```
-$ pip install -r requirements.txt
+    pip install -r requirements.txt
 ```
 
 5. Add your Meetup API key
 ```
-$ python3 main.py auth [API Key]
+    python3 main.py auth [API Key]
 ```
 
 ## Usage
@@ -38,7 +38,7 @@ $ python3 main.py auth [API Key]
 Providing that you have virtualenv activated
 
 ```
-$ python3 main.py add [Event_file.yml]
+    python3 main.py add [Event_file.yml]
 ```
 
 ## Event file format
