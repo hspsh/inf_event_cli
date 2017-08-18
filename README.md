@@ -33,6 +33,8 @@
     python3 main.py auth [API Key]
 ```
 
+You can obtain your API key [here](https://secure.meetup.com/meetup_api/key/)
+
 ## Usage
 
 Providing that you have virtualenv activated
