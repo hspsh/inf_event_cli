@@ -1,28 +1,55 @@
-0. virtualenv -p python3 env
-1. zainstaluj requirementy
-2. python3 main.py auth [API Key]
+# inf_events_cli
 
-3. python3 main.py add [Event file]
+## Installation
 
-v.1.:
-- przepisać v2 na issues
+0. Clone this repo:
 
-- dokumentacja głupcze -> lepsze readme (format pliku itp.)
-- refactor API key method
+```bash
+$ git clone https://github.com/hs3city/inf_event_cli
+```
 
-@later
-v.1.1:
-- change and commit urlname for Hackerspace
+1. Enter folder:
+```
+$ cd inf_event_cli
+```
 
-- help message about command
-- help message about add [file] argument
-- description about the app in the help page
-- wrong command also triggers help message
+2. Create virtualenv:
+```
+$ virtualenv -p python3 env
+```
 
-- refactor authentication to pure python
+3. Activate virtualenv
+```
+$ . env/bin/activate
+```
 
-- add a devconfig with `URL_NAME = "Meetup-API-Testing`
+4. Install requirements
+```
+$ pip install -r requirements.txt
+```
 
-- refactor to OOP
+5. Add your Meetup API key
+```
+$ python3 main.py auth [API Key]
+```
 
-- nicer way to account for timezone difference
+## Usage
+
+Providing that you have virtualenv activated
+
+```
+$ python3 main.py add [Event_file.yml]
+```
+
+## Event file format
+
+- YAML
+- Must contain:
+    - date
+    - time
+    - name
+    - description
+- May contain:
+    - comments / message from event creator
+
+Sample file is located in ```docs/sample_event_file.yml```

@@ -1,0 +1,7 @@
+# Sample comment
+# Must start with hash
+
+--- 
+name: Your event name
+description: What will happen at your event and why people should come
+time: yyyy-mm-dd hh:mm:ss

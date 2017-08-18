@@ -39,7 +39,6 @@ def convertTime(time):
 
 def createEvent(eventData):
     apiKey = _importAPIKey()
-    print(apiKey)
     client = _initClient(apiKey)
     targetData = _initTargetData(client)
 
