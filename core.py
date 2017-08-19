@@ -15,10 +15,13 @@ def _initClient(apiKey):
     return meetup.api.Client(apiKey)
 
 
-def _initTargetData(client):
+def _initTargetData(client, isDev):
     _data = {}
 
     _data['group_urlname'] = target.URL_NAME
+
+    if isDev:
+        _data['group_urlname'] = "Meetup-API-Testing"
 
     group_info = client.GetGroup(urlname=_data['group_urlname'])
     _data['group_id'] = group_info.id
@@ -37,10 +40,10 @@ def convertTime(time):
     return timestamp
 
 
-def createEvent(eventData):
+def createEvent(eventData, isDev):
     apiKey = _importAPIKey()
     client = _initClient(apiKey)
-    targetData = _initTargetData(client)
+    targetData = _initTargetData(client, isDev)
 
     eventData['time'] = convertTime(eventData['time'])
 

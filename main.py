@@ -8,9 +8,10 @@ def main():
 
 @main.command()
 @click.argument('event_file')
-def add(event_file):
+@click.option('--dev', is_flag=True)
+def add(event_file, dev):
     eventData = readYAML(event_file)
-    createEvent(eventData)
+    createEvent(eventData, dev)
 
 import subprocess
 
