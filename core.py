@@ -4,9 +4,7 @@ from config import target
 
 def _importAPIKey():
     with open('config/apikey.txt', 'r') as file:
-        key = file.readline()
-        # trimms newline character
-        key = key[:-1]
+        key = file.readline().strip()
 
     return key
 
