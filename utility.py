@@ -12,44 +12,41 @@ def readYAML(filename):
 
 # NOTE: This is step backwards in converting yaml data to meetup api request
 def dict2iso_interval(yaml_dt):
-    """Joins ISO datetime and duration to one string
-    Returns one of:
+    """Returns one of:
     (<start>)
     (<start>, <end>)
     (<start>, <duration>)
     (<duration>, <end>) <=> (<end> - <duration>/<duration>)
     """
-    # intervals = []
 
     try:
         _start = isodate.parse_datetime(yaml_dt['start'])
-        # intervals.append(_start)
     except KeyError:
         try:
             _duration = isodate.parse_duration(yaml_dt['duration'])
             _end = isodate.parse_datetime(yaml_dt['end'])
-            # intervals.append(_duration)
-            # intervals.append(_end)
             intervals = (_duration, _end)
+            # intervals = (_end - _duration, _duration)
         except KeyError:
             raise
     else:
         if 'duration' in yaml_dt:
             _duration = isodate.parse_duration(yaml_dt['duration'])
-            # intervals.append(_duration)
             intervals = (_start, _duration)
         elif 'end' in yaml_dt:
             _end = isodate.parse_datetime(yaml_dt['end'])
-            # intervals.append(_end)
             intervals = (_start, _end)
         else:
             intervals = (_start)
 
-    # result = '/'.join(intervals)
     result = intervals
     return result
 
+def parse_iso_interval(arg):
+    """Parses ISO time interval notation to dict with meetup compatible keys
 
+    """
+    pass
 
 # TODO: change function name
 def parse_datetime(raw_dt):
