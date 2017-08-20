@@ -2,40 +2,40 @@
 
 ## Installation
 
-1. Clone this repo:
+0. Clone this repo:
 
   ```bash
-  git clone https://github.com/hs3city/inf_event_cli
+    git clone https://github.com/hs3city/inf_event_cli
   ```
 
-2. Enter folder:
+1. Enter folder:
 
   ```bash
-  cd inf_event_cli
+    cd inf_event_cli
   ```
 
-3. Create virtualenv:
+2. Create virtualenv:
 
   ```bash
-  virtualenv -p python3 env
+    virtualenv -p python3 venv
   ```
 
-4. Activate virtualenv
+3. Activate virtualenv
 
   ```bash
-  . env/bin/activate
+    . venv/bin/activate
   ```
 
-5. Install requirements
+4. Install requirements
 
   ```bash
-  pip install -r requirements.txt
+    pip install -r requirements.txt
   ```
 
-6. Add your Meetup API key
+5. Add your Meetup API key
 
   ```bash
-  python3 main.py auth [API Key]
+    python3 main.py auth [API Key]
   ```
 
 You can obtain your API key [here](https://secure.meetup.com/meetup_api/key/)
@@ -45,7 +45,7 @@ You can obtain your API key [here](https://secure.meetup.com/meetup_api/key/)
 Providing that you have virtualenv activated
 
 ```bash
-python3 main.py add [Event_file.yml]
+  python3 main.py add [Event_file.yml]
 ```
 
 ## Event file format
