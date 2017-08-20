@@ -1,7 +1,7 @@
 import meetup.api
 from datetime import datetime, timedelta
 from config import target
-from timeutils import datetime2ms
+from timeutils import meetup_time, meetup_duration
 
 def _importAPIKey():
     with open('config/apikey.txt', 'r') as file:
@@ -31,18 +31,23 @@ def _initTargetData(client, isDev):
 
     return _data
 
-
-
+# not7cd: is it updating?
+def update_event_data(data):
+    """Updates event data to be compatible with meetup API"""
+    data.update(meetup_time(data['time']))
+    if 'duration' in data:
+        data.update(meetup_duration(data['duration']))
+    return data
 
 def createEvent(eventData, isDev):
     apiKey = _importAPIKey()
     client = _initClient(apiKey)
     targetData = _initTargetData(client, isDev)
 
-    eventData['time'] = datetime2ms(eventData['time'])
+    eventData = update_event_data(eventData)
 
     client.CreateEvent(** targetData, **eventData)
 
 if __name__ == '__main__':
     test_time = datetime.now()
-    print(datetime2ms(test_time))
+    print(meetup_time(test_time))
