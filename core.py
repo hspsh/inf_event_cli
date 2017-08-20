@@ -1,6 +1,7 @@
 import meetup.api
 from datetime import datetime, timedelta
 from config import target
+from timeutils import datetime2ms
 
 def _importAPIKey():
     with open('config/apikey.txt', 'r') as file:
@@ -30,20 +31,7 @@ def _initTargetData(client, isDev):
 
     return _data
 
-# TODO not7cd: Move to utility?
-# NOTE not7cd: convertTime -> datetime2milliseconds -> datetime2ms, najdłuższa nazwa w mieście
-def datetime2ms(dt):
-    """Converts datetime to milliseconds"""
-    # TODO not7cd: better timezone handling?
-    # account for timezone difference
-    dt += timedelta(hours=6)
-    ms = int(dt.timestamp() * 1000)
-    return ms
 
-def timedelta2ms(td):
-    """Converts timedelta to milliseconds"""
-    ms = int(td.total_seconds() * 1000)
-    return ms
 
 
 def createEvent(eventData, isDev):
