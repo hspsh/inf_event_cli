@@ -19,14 +19,15 @@ def meetup_duration(td):
     result = timedelta2ms(td)
     return {'duration': result}
 
-
+def sec2ms(sec):
+    return int(sec * 1000)
 
 def datetime2ms(dt):
     """Converts datetime to milliseconds"""
-    ms = int(dt.timestamp() * 1000)
+    ms = sec2ms(dt.timestamp())
     return ms
 
 def timedelta2ms(td):
     """Converts timedelta to milliseconds"""
-    ms = int(td.total_seconds() * 1000)
+    ms = sec2ms(td.total_seconds())
     return ms
