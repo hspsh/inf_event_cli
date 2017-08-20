@@ -10,47 +10,84 @@ def readYAML(filename):
         except yaml.YAMLError as exc:
             print(exc)
 
+# NOTE: This is step backwards in converting yaml data to meetup api request
+def dict2iso_interval(yaml_dt):
+    """Joins ISO datetime and duration to one string
+    Returns one of:
+    (<start>)
+    (<start>, <end>)
+    (<start>, <duration>)
+    (<duration>, <end>) <=> (<end> - <duration>/<duration>)
+    """
+    # intervals = []
+
+    try:
+        _start = isodate.parse_datetime(yaml_dt['start'])
+        # intervals.append(_start)
+    except KeyError:
+        try:
+            _duration = isodate.parse_duration(yaml_dt['duration'])
+            _end = isodate.parse_datetime(yaml_dt['end'])
+            # intervals.append(_duration)
+            # intervals.append(_end)
+            intervals = (_duration, _end)
+        except KeyError:
+            raise
+    else:
+        if 'duration' in yaml_dt:
+            _duration = isodate.parse_duration(yaml_dt['duration'])
+            # intervals.append(_duration)
+            intervals = (_start, _duration)
+        elif 'end' in yaml_dt:
+            _end = isodate.parse_datetime(yaml_dt['end'])
+            # intervals.append(_end)
+            intervals = (_start, _end)
+        else:
+            intervals = (_start)
+
+    # result = '/'.join(intervals)
+    result = intervals
+    return result
+
+
+
 # TODO: change function name
-def parse_datetime(dt):
+def parse_datetime(raw_dt):
     """Creates dict of datetime and duration with meetup compatible keys"""
-    if isinstance(dt, str):
-        split_dt = dt.split('/')
-        print(split_dt)
-        meetup_dt = {}
+    if isinstance(raw_dt, str):
+        split_dt = raw_dt.split('/')
+        # print(split_dt)
+        _time = split_dt[0]
+        _duration = split_dt[1]
 
-        meetup_dt['time'] = isodate.parse_datetime(split_dt[0])
-        # TODO: try...except duration doesn't exist
-        meetup_dt['duration'] = isodate.parse_duration(split_dt[1])
-
-        print(meetup_dt)
-        return meetup_dt
-    elif isinstance(dt, dict):
+    elif isinstance(raw_dt, dict):
         # TODO: check if there is at least one point in time
-        if 'start' in dt and 'end' in dt:
-            _time = dt['start']
-            _duration = dt['end'] - dt['start']
-        elif 'duration' in dt:
-            if 'start' in dt:
-                _time = dt['start']
-                _duration = dt['duration']
+        if 'start' in raw_dt and 'end' in raw_dt:
+            _time = raw_dt['start']
+            _duration = raw_dt['end'] - raw_dt['start']
+        elif 'duration' in raw_dt:
+            if 'start' in raw_dt:
+                _time = raw_dt['start']
+                _duration = raw_dt['duration']
             else:
-                _time = dt['end'] - dt['duration']
-                _duration = dt['duration']
+                _time = raw_dt['end'] - raw_dt['duration']
+                _duration = raw_dt['duration']
         else:
             try:
-                _time = dt['start']
+                _time = raw_dt['start']
             except Exception: # TODO: Exception too general
                 raise
 
-        meetup_dt = {}
+    # NOTE: This can go to separate function
+    meetup_dt = {}
 
-        meetup_dt['time'] = isodate.parse_datetime(_time)
-        # TODO: try...except duration doesn't exist
+    meetup_dt['time'] = isodate.parse_datetime(_time)
+    try:
         meetup_dt['duration'] = isodate.parse_duration(_duration)
+    except KeyError:
+        pass
 
-        return meetup_dt
-    else:
-        raise TypeError('')
+    return meetup_dt
 # tests
 if __name__ == '__main__':
     short = """
