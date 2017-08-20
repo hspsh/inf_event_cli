@@ -13,15 +13,17 @@ def add(event_file, dev):
     eventData = readYAML(event_file)
     createEvent(eventData, dev)
 
-import subprocess
-
-def _exec(command):
-    subprocess.run(command, shell=True, check=True)
+# import subprocess
+#
+# def _exec(command):
+#     subprocess.run(command, shell=True, check=True)
 
 @main.command()
 @click.argument('key')
 def auth(key):
-    _exec('echo "{}" > config/apikey.txt'.format(key))
+    # _exec('echo "{}" > config/apikey.txt'.format(key))
+    with open('config/apikey.txt', 'w') as file:
+        file.write(key)
 
 
 if __name__ == '__main__':
