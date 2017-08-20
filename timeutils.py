@@ -3,18 +3,26 @@ from datetime import timedelta, timezone
 def meetup_time(dt):
     """Converts time to format accepted by meetup API"""
     # Account for meetup server location... WTF
-    pass
-def meetup_duration(arg):
+    # TODO not7cd: better timezone handling?
+    # Since we except dt to be in local tz (CEST for Gdańsk)
+    # If meetup is in ETC, this should do the trick
+    # TODO: Test meetup API for time
+    meetup_tz = timezone(-timedelta(hours=4))
+    # meetup_tz = timezone.utc
+    meetup_dt = dt.replace(tzinfo=meetup_tz)
+
+    result = datetime2ms(meetup_dt)
+    return {'time': result}
+
+def meetup_duration(td):
     """Converts duration to format accepted by meetup API"""
-    pass
+    result = timedelta2ms(td)
+    return {'duration': result}
+
+
 
 def datetime2ms(dt):
     """Converts datetime to milliseconds"""
-    # TODO allgreed: better timezone handling?
-    # account for timezone difference
-    # dt = dt.replace(tzinfo=timezone.utc).timestamp()
-    # dt += timedelta(hours=4)
-
     ms = int(dt.timestamp() * 1000)
     return ms
 
