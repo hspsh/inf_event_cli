@@ -32,7 +32,7 @@ def _initTargetData(client, isDev):
 
 # TODO not7cd: Move to utility?
 # NOTE not7cd: convertTime -> datetime2milliseconds -> dt2ms, najdłuższa nazwa w mieście
-def dt2ms(dt):
+def datetime2ms(dt):
     """Converts datetime to milliseconds"""
     # TODO not7cd: better timezone handling?
     # account for timezone difference
@@ -40,7 +40,7 @@ def dt2ms(dt):
     ms = int(dt.timestamp() * 1000)
     return ms
 
-def td2ms(td):
+def timedelta2ms(td):
     """Converts timedelta to milliseconds"""
     ms = int(td.total_seconds() * 1000)
     return ms
@@ -51,7 +51,7 @@ def createEvent(eventData, isDev):
     client = _initClient(apiKey)
     targetData = _initTargetData(client, isDev)
 
-    eventData['time'] = dt2ms(eventData['time'])
+    eventData['time'] = datetime2ms(eventData['time'])
 
     client.CreateEvent(** targetData, **eventData)
 
