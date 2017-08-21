@@ -1,7 +1,10 @@
+import logging
 import meetup.api
 from datetime import datetime, timedelta
 from config import target
 from timeutils import meetup_time, meetup_duration
+
+logger = logging.getLogger(__name__)
 
 
 def _importAPIKey():
@@ -43,12 +46,18 @@ def update_event_data(data):
 
 def createEvent(event_data, is_dev):
     """Sends request to meetup to create event with given event_data"""
+
+    logger.info('create meetup client')
     api_key = _importAPIKey()
     client = _initClient(api_key)
     target_data = _initTargetData(client, is_dev)
 
+    logger.info('create request parameters')
+    logger.debug(event_data)
     event_data = update_event_data(event_data)
+    logger.debug(event_data)
 
+    logger.info('send request')
     client.CreateEvent(**target_data, **event_data)
 
 if __name__ == '__main__':

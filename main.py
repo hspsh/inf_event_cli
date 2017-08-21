@@ -1,18 +1,21 @@
+import logging
+from datetime import datetime
 import click
 from utility import readYAML
 from core import createEvent
 
 @click.group()
 def main():
-    pass
+    logging.basicConfig(filename='inf_event_cli.log', level=logging.DEBUG)
+    logging.info(datetime.now())
 
 @main.command()
 @click.argument('event_file', metavar='<file.yml>')
 @click.option('--dev', is_flag=True, help="Uses Meetup Testing API group, insted of target group.")
 def add(event_file, dev):
     """Publishes event on Meetup"""
-    eventData = readYAML(event_file)
-    createEvent(eventData, dev)
+    event_data = readYAML(event_file)
+    createEvent(event_data, dev)
 
 @main.command()
 @click.argument('key')
