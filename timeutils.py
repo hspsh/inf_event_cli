@@ -1,5 +1,6 @@
+import logging
 from datetime import timedelta, timezone
-
+logger = logging.getLogger(__name__)
 
 def meetup_time(dt):
     """Converts time to format accepted by meetup API"""

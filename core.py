@@ -19,6 +19,7 @@ def _initClient(apiKey):
 
 
 def _initTargetData(client, isDev):
+    """Returns dict of parameters for request target"""
     _data = {}
 
     _data['group_urlname'] = target.URL_NAME
@@ -50,16 +51,19 @@ def createEvent(event_data, is_dev):
     logger.info('create meetup client')
     api_key = _importAPIKey()
     client = _initClient(api_key)
-    target_data = _initTargetData(client, is_dev)
 
     logger.info('create request parameters')
+    target_data = _initTargetData(client, is_dev)
+
     logger.debug(event_data)
     event_data = update_event_data(event_data)
-    logger.debug(event_data)
+
+    request_parameters = {**event_data, **target_data}
+    logger.debug(request_parameters)
 
     logger.info('send request')
-    client.CreateEvent(**target_data, **event_data)
+    client.CreateEvent(**request_parameters)
 
 if __name__ == '__main__':
-    test_time = datetime.now()
-    print(meetup_time(test_time))
+    # test_time = datetime.now()
+    # print(meetup_time(test_time))
