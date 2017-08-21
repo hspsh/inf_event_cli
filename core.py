@@ -6,9 +6,7 @@ from timeutils import meetup_time, meetup_duration
 
 def _importAPIKey():
     with open('config/apikey.txt', 'r') as file:
-        key = file.readline()
-        # trimms newline character
-        key = key[:-1]
+        key = file.readline().strip()
 
     return key
 
