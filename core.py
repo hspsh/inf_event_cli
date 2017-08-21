@@ -63,7 +63,3 @@ def createEvent(event_data, is_dev):
 
     logger.info('send request')
     client.CreateEvent(**request_parameters)
-
-if __name__ == '__main__':
-    # test_time = datetime.now()
-    # print(meetup_time(test_time))

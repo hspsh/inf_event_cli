@@ -6,8 +6,8 @@ from core import createEvent
 
 @click.group()
 def main():
-    logging.basicConfig(filename='inf_event_cli.log', level=logging.DEBUG)
-    logging.info(datetime.now())
+    logging.basicConfig(filename='inf_event_cli.log', level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    logging.info('start')
 
 @main.command()
 @click.argument('event_file', metavar='<file.yml>')
