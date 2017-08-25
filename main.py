@@ -4,6 +4,10 @@ from core import createEvent
 
 @click.group()
 def main():
+    """Event CLI for Tricity Hackerspace
+
+    Now go! Add some events!
+    """
     pass
 
 @main.command()
