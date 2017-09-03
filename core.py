@@ -45,7 +45,7 @@ def update_event_data(data):
     return data
 
 
-def createEvent(event_data, is_dev):
+def create_event(event_data, is_dev):
     """Sends request to meetup to create event with given event_data"""
 
     logger.info('create meetup client')
@@ -62,4 +62,4 @@ def createEvent(event_data, is_dev):
     logger.debug(request_parameters)
 
     logger.info('send request')
-    client.CreateEvent(**request_parameters)
+    client.create_event(**request_parameters)

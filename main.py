@@ -2,7 +2,7 @@ import logging
 from datetime import datetime
 import click
 from utility import readYAML
-from core import createEvent
+from core import create_event
 
 @click.group()
 def main():
@@ -15,7 +15,7 @@ def main():
 def add(event_file, dev):
     """Publishes event on Meetup"""
     event_data = readYAML(event_file)
-    createEvent(event_data, dev)
+    create_event(event_data, dev)
 
 @main.command()
 @click.argument('key')
