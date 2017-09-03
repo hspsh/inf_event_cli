@@ -62,4 +62,4 @@ def create_event(event_data, is_dev):
     logger.debug(request_parameters)
 
     logger.info('send request')
-    client.create_event(**request_parameters)
+    client.CreateEvent(**request_parameters)

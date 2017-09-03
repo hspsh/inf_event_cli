@@ -1,6 +1,11 @@
 import logging
-from datetime import timedelta, timezone
+from datetime import timedelta, timezone, datetime
 logger = logging.getLogger(__name__)
+
+# Nowy York xD
+MEETUP_TZ = timezone(-timedelta(hours=4))
+# CEST
+HS_TZ = timezone(timedelta(hours=2))
 
 def meetup_time(dt):
     """Converts time to format accepted by meetup API"""
@@ -9,14 +14,19 @@ def meetup_time(dt):
     # Since we except dt to be in local tz (CEST for Gdańsk)
     # If meetup is in ETC, this should do the trick
     # TODO: Test meetup API for time
-    logger.info('change timezone')
-    logger.debug(dt)
-    meetup_tz = timezone(-timedelta(hours=4))
+    # make original datetime
     # meetup_tz = timezone.utc
-    meetup_dt = dt.replace(tzinfo=meetup_tz)
-    logger.debug(meetup_dt)
+    # meetup_dt = dt.astimezone(tz=MEETUP_TZ)
+    # meetup_dt = dt.replace(tzinfo=MEETUP_TZ)
+    # logger.debug(meetup_dt)
 
-    result = datetime2ms(meetup_dt)
+    # logger.debug((meetup_dt.astimezone(tz=timezone.utc)))
+
+    logger.debug("%s, %s" % (dt, dt.timestamp()))
+    logger.info('change timezone')
+    dt = dt.replace(tzinfo=HS_TZ)
+    logger.debug("%s, %s" % (dt, dt.timestamp()))
+    result = datetime2ms(dt)
     return {'time': result}
 
 
