@@ -9,9 +9,12 @@ def meetup_time(dt):
     # Since we except dt to be in local tz (CEST for Gdańsk)
     # If meetup is in ETC, this should do the trick
     # TODO: Test meetup API for time
+    logger.info('change timezone')
+    logger.debug(dt)
     meetup_tz = timezone(-timedelta(hours=4))
     # meetup_tz = timezone.utc
     meetup_dt = dt.replace(tzinfo=meetup_tz)
+    logger.debug(meetup_dt)
 
     result = datetime2ms(meetup_dt)
     return {'time': result}
