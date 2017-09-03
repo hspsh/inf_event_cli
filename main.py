@@ -6,8 +6,13 @@ from core import create_event
 
 @click.group()
 def main():
+    """Event CLI for Tricity Hackerspace
+
+    Now go! Add some events!
+    """
     logging.basicConfig(filename='inf_event_cli.log', level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     logging.info('start')
+
 
 @main.command()
 @click.argument('event_file', metavar='<file.yml>')
