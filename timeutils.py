@@ -9,23 +9,10 @@ HS_TZ = timezone(timedelta(hours=2))
 
 def meetup_time(dt):
     """Converts time to format accepted by meetup API"""
-    # Account for meetup server location... WTF
-    # TODO not7cd: better timezone handling?
-    # Since we except dt to be in local tz (CEST for Gdańsk)
-    # If meetup is in ETC, this should do the trick
-    # TODO: Test meetup API for time
-    # make original datetime
-    # meetup_tz = timezone.utc
-    # meetup_dt = dt.astimezone(tz=MEETUP_TZ)
-    # meetup_dt = dt.replace(tzinfo=MEETUP_TZ)
-    # logger.debug(meetup_dt)
-
-    # logger.debug((meetup_dt.astimezone(tz=timezone.utc)))
-
-    logger.debug("%s, %s" % (dt, dt.timestamp()))
+    logger.debug("%s, %s", dt, dt.timestamp())
     logger.info('change timezone')
     dt = dt.replace(tzinfo=HS_TZ)
-    logger.debug("%s, %s" % (dt, dt.timestamp()))
+    logger.debug("%s, %s", dt, dt.timestamp())
     result = datetime2ms(dt)
     return {'time': result}
 
