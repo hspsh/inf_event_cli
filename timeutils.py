@@ -2,9 +2,7 @@ import logging
 from datetime import timedelta, timezone, datetime
 logger = logging.getLogger(__name__)
 
-# Nowy York xD
-MEETUP_TZ = timezone(-timedelta(hours=4))
-# CEST
+MEETUP_TZ = timezone(timedelta(hours=-4))
 HS_TZ = timezone(timedelta(hours=2))
 
 def meetup_time(dt):
