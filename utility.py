@@ -1,9 +1,13 @@
+import logging
 import yaml
+logger = logging.getLogger(__name__)
 
 def readYAML(filename):
+    """Returns dict of parsed data from file"""
     with open(filename, 'r') as stream:
         try:
-            parsedData = (yaml.load(stream))
-            return parsedData
-        except yaml.YAMLError as exc:
-            print(exc)
+            parsed_data = (yaml.load(stream))
+            return parsed_data
+        except yaml.YAMLError as err:
+            print(err)
+            logger.debug(err)
