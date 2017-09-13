@@ -1,5 +1,7 @@
+"""Helping with time around the clock"""
+
 import logging
-from datetime import timedelta, timezone, datetime
+from datetime import timedelta, timezone
 logger = logging.getLogger(__name__)
 
 MEETUP_TZ = timezone(timedelta(hours=-4))
@@ -22,6 +24,7 @@ def meetup_duration(td):
 
 
 def sec2ms(sec):
+    """Converts seconds to milliseconds"""
     return int(sec * 1000)
 
 
