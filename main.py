@@ -1,8 +1,10 @@
 import logging
-from datetime import datetime
+
 import click
-from utility import readYAML
+
 from core import create_event
+from utility import read_yaml
+
 
 @click.group()
 def main():
@@ -10,17 +12,26 @@ def main():
 
     Now go! Add some events!
     """
-    logging.basicConfig(filename='inf_event_cli.log', level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    logging.basicConfig(
+        filename='inf_event_cli.log',
+        level=logging.DEBUG,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
     logging.info('start')
 
 
 @main.command()
 @click.argument('event_file', metavar='<file.yml>')
-@click.option('--dev', is_flag=True, help="Uses Meetup Testing API group, insted of target group.")
+@click.option(
+    '--dev',
+    is_flag=True,
+    help="Uses Meetup Testing API group, instead of target group."
+)
 def add(event_file, dev):
     """Publishes event on Meetup"""
-    event_data = readYAML(event_file)
+    event_data = read_yaml(event_file)
     create_event(event_data, dev)
+
 
 @main.command()
 @click.argument('key')
