@@ -1,8 +1,11 @@
 import logging
+
 import yaml
+
 logger = logging.getLogger(__name__)
 
-def readYAML(filename):
+
+def read_yaml(filename):
     """Returns dict of parsed data from file"""
     with open(filename, 'r') as stream:
         try:

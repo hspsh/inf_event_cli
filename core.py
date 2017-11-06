@@ -1,30 +1,29 @@
 import logging
+
 import meetup.api
-from datetime import datetime, timedelta
+
 from config import target
 from timeutils import meetup_time, meetup_duration
 
 logger = logging.getLogger(__name__)
 
 
-def _importAPIKey():
+def _import_api_key():
     with open('config/apikey.txt', 'r') as file:
         key = file.readline().strip()
 
     return key
 
 
-def _initClient(apiKey):
-    return meetup.api.Client(apiKey)
+def _init_client(api_key):
+    return meetup.api.Client(api_key)
 
 
-def _initTargetData(client, isDev):
+def _init_target_data(client, is_dev):
     """Returns dict of parameters for request target"""
-    _data = {}
+    _data = {'group_urlname': target.URL_NAME}
 
-    _data['group_urlname'] = target.URL_NAME
-
-    if isDev:
+    if is_dev:
         _data['group_urlname'] = "Meetup-API-Testing"
 
     group_info = client.GetGroup(urlname=_data['group_urlname'])
@@ -33,7 +32,6 @@ def _initTargetData(client, isDev):
     _data['venue_id'] = target.VENUE
 
     return _data
-
 
 
 def update_event_data(data):
@@ -49,11 +47,11 @@ def create_event(event_data, is_dev):
     """Sends request to meetup to create event with given event_data"""
 
     logger.info('create meetup client')
-    api_key = _importAPIKey()
-    client = _initClient(api_key)
+    api_key = _import_api_key()
+    client = _init_client(api_key)
 
     logger.info('create request parameters')
-    target_data = _initTargetData(client, is_dev)
+    target_data = _init_target_data(client, is_dev)
 
     logger.debug(event_data)
     event_data = update_event_data(event_data)
