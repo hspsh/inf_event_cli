@@ -62,4 +62,10 @@ Providing that you have virtualenv activated
 
   - comments / message from event creator
 
+## Selenium Config
+In config/selenium.py change string to yours firefox bin location. Ex: /usr/bin/firefox
+
+## Google Calendar API
+Generate client_secret.json file. You can generate it here: https://console.developers.google.com/apis/credentials
+
 Sample file is located in ```docs/sample_event_file.yml```
