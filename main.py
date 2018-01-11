@@ -37,7 +37,7 @@ def add(event_file, dev):
 @click.argument('key')
 def auth(key):
     """Authenticates app with Meetup API key"""
-    with open('config/apikey.txt', 'w') as file:
+    with open('.credentials/apikey.txt', 'w') as file:
         file.write(key)
 
 

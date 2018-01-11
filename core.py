@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def _import_api_key():
-    with open('config/apikey.txt', 'r') as file:
+    with open('.credentials/apikey.txt', 'r') as file:
         key = file.readline().strip()
 
     return key
