@@ -37,12 +37,32 @@ def read_wydarzenia_channel():
         unreads='true',
     )
 
-def search_for_msgs_with_new_events():
-    msg_history = read_wydarzenia_channel()
-    print(msg_history)
-    for msg in msg_history:
-        print(msg)
 
+def found_msgs_with_like_from_klara():
+    msg_history = read_wydarzenia_channel()
+    msg_history = msg_history['messages']
+    results = []
+    events_owners = []
+    for row in msg_history:
+        try:
+            if klara in row['reactions'][0]['users']:
+                if row['reactions'][0]['name'] == '+1':
+                    print('founded klara')
+                    results.append(row)
+        except KeyError:
+            pass
+    return results, events_owners
+
+
+def search_for_msgs_with_new_events():
+    msgs = found_msgs_with_like_from_klara()[0]
+    keywords = ['Kiedy', 'Tytuł', 'Opis']
+    print(msgs)
+    msgs[0]
+    indx = 0
+    for msg in msgs:
+        print(indx, msg)
+        indx += 1
 
 if __name__ == '__main__':
     search_for_msgs_with_new_events()
