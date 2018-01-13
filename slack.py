@@ -53,7 +53,7 @@ def found_msgs_with_like_from_klara():
             pass
     return results, events_owners
 
-
+# WIP, waiting for second event with Klara like to be able to do good testing.
 def search_for_msgs_with_new_events():
     msgs = found_msgs_with_like_from_klara()[0]
     keywords = ['Kiedy', 'Tytuł', 'Opis']
