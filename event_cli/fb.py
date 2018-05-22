@@ -1,4 +1,3 @@
-import os
 from random import randint
 from time import sleep
 
@@ -6,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 
-from config.selenium import SELENIUM_DRIVER_LOCATION
+from event_cli.config import SELENIUM_DRIVER_LOCATION
 
 binary = FirefoxBinary(SELENIUM_DRIVER_LOCATION)
 driver = webdriver.Firefox(firefox_binary=binary)
