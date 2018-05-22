@@ -2,8 +2,8 @@ import logging
 
 import click
 
-from core import create_event
-from utility import read_yaml
+from event_cli.core import create_event
+from event_cli.utility import read_yaml
 
 
 @click.group()

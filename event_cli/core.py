@@ -2,8 +2,8 @@ import logging
 
 import meetup.api
 
-from config import target
-from timeutils import meetup_time, meetup_duration
+from event_cli.config import target
+from event_cli.timeutils import meetup_time, meetup_duration
 
 logger = logging.getLogger(__name__)
 
