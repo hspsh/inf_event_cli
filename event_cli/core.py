@@ -60,4 +60,7 @@ def create_event(event_data, is_dev):
     logger.debug(request_parameters)
 
     logger.info('send request')
-    client.CreateEvent(**request_parameters)
+    try:
+        client.CreateEvent(**request_parameters)
+    except meetup.api.exceptions.HttpUnauthorized:
+        logger.error('unauthorized')
